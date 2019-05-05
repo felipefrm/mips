@@ -48,8 +48,7 @@ main:
  	
 else:
 	add $t0, $a2, $zero
- 	div $a1, $a2 		#divide numero 1 pelo numero 2
- 	mfhi $a2   		#salva o resto da divisão
+	rem $a2, $a1, $a2	#resto da divisão de a por b
  	add $a1, $t0, $zero
  	
  	jal mdc			#chamada recursiva
