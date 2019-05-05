@@ -26,12 +26,12 @@ main:
  	
  	jal mdc
  	
- 	add $t0, $a0, $zero	#guarda o retorno da função em uma reigstrador temporario (p/ q o a0 possa ser usado para printar a string) 
+ 	add $t0, $v0, $zero	#guarda o retorno da função em uma reigstrador temporario (p/ q o v0 possa ser usado para printar a string) 
  	li, $v0, 4
  	la $a0, msg3		#printa a mensagem 3
  	syscall
 
-	add $a0, $t0, $zero	#"devolve" o retorno da função ao a0 para que ele possa ser printado na tela
+	add $a0, $t0, $zero	#a0 recebe o valor retornado da funão para que ele possa ser printado na tela
  	li $v0, 1
  	syscall
  	j exit
@@ -43,7 +43,7 @@ main:
  	sw $ra, 8($sp)		# Guarda endereço de retorno
  	
  	bnez $a2, else		# a2 != 0 ?
- 	add $a0, $a1, $zero	# se a2 == 0, coloca-se o valor de a2 em a0 para que possa ser retornado para a main 
+ 	add $v0, $a1, $zero	# se a2 == 0, coloca-se o valor de a2 em v0 para que possa ser retornado para a main 
  	addi $sp, $sp, 12	#liberando memoria
  	jr $ra			#desvia o programa para o endereço de retorno do programa principal
  	
