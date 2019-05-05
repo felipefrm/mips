@@ -34,8 +34,7 @@
  	li $s4, 2		#variavel fixa para descobrir se o s1 é par ou impar 	
  loop: 	
  	beq $s0, $s1, return	#caso de saida do loop
- 	div $s1, $s4 		#divisao para verificar se s1 é par ou impar
- 	mfhi $t0   		#salva o resto da divisão
+	rem $t0, $s1, $s4	# resto da divisão para verificar se o termo é par ou impar
  	beq $t0, $zero, par	#se s1 for par, pula pra label par
  	mtc1 $s3,$f1		#converte inteiro para float e salva em f1
  	mtc1 $s2,$f2		#converte inteiro para float e salva em f2
