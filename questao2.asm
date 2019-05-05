@@ -1,10 +1,11 @@
 .data
 
-msg1: .asciiz "\nDigite o primeiro número: "
-msg2: .asciiz "Digite o segundo número: "
-msg3: .asciiz "\nO MDC é igual a: "
-	.text
-	.globl main
+	msg1: .asciiz "\nDigite o primeiro número: "
+	msg2: .asciiz "Digite o segundo número: "
+	msg3: .asciiz "\nO MDC é igual a: "
+	
+.text
+.globl main
 	
 main:
 	li $v0, 4		#printa a mensagem 1
@@ -25,12 +26,12 @@ main:
  	
  	jal mdc
  	
- 	add $t0, $a0, $zero
+ 	add $t0, $a0, $zero	#guarda o retorno da função em uma reigstrador temporario (p/ q o a0 possa ser usado para printar a string) 
  	li, $v0, 4
- 	la $a0, msg3
+ 	la $a0, msg3		#printa a mensagem 3
  	syscall
 
-	add $a0, $t0, $zero
+	add $a0, $t0, $zero	#"devolve" o retorno da função ao a0 para que ele possa ser printado na tela
  	li $v0, 1
  	syscall
  	j exit
@@ -41,23 +42,23 @@ main:
  	sw $a2, 4($sp)
  	sw $ra, 8($sp)		# Guarda endereço de retorno
  	
- 	bnez $a2, else
- 	add $a0, $a1, $zero
+ 	bnez $a2, else		# a2 != 0 ?
+ 	add $a0, $a1, $zero	# se a2 == 0, coloca-se o valor de a2 em a0 para que possa ser retornado para a main 
  	addi $sp, $sp, 12	#liberando memoria
- 	jr $ra
+ 	jr $ra			#desvia o programa para o endereço de retorno do programa principal
  	
 else:
-	add $t0, $a2, $zero
-	rem $a2, $a1, $a2	#resto da divisão de a por b
- 	add $a1, $t0, $zero
+	add $t0, $a2, $zero	#aux = $a2
+	rem $a2, $a1, $a2	#resto da divisão de $a1 por $a2
+ 	add $a1, $t0, $zero	# $a1 = aux
  	
  	jal mdc			#chamada recursiva
  	
  	lw $a1, 0($sp)		#recuperando $s0
  	lw $a2, 4($sp)		#recuperando $s1
- 	lw $ra 8($sp)
- 	addi $sp, $sp, 12
- 	jr $ra
+ 	lw $ra 8($sp)		#recuperando o endereço de retorno
+ 	addi $sp, $sp, 12	#libera o espaço usado
+ 	jr $ra			#desvia o programa para o endereço de retorno do programa principal
 
 exit:
 	li $v0, 10		#termino de execução
