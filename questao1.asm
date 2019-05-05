@@ -20,7 +20,7 @@
 	li $v0, 4 
 	la $a0, msg2		#imprime mensagem 2
 	syscall
-	li $v0, 2		#imprime valor aproximado de pi (float)
+	li $v0, 2		#imprime valor aproximado de pi ($f12)
  	syscall	
  	j exit			#jump para o fim do programa
  	
@@ -39,7 +39,7 @@
  	mtc1 $s3,$f1		#converte inteiro para float e salva em f1
  	mtc1 $s2,$f2		#converte inteiro para float e salva em f2
  	div.s $f1, $f1, $f2 	#divide a constante 4 por um numero impar
- 	add.s $f12,$f12,$f1	#soma ao valor de pi o resultado da divisão
+ 	add.s $f12,$f12,$f1	#soma ao valor de pi o resultado da divisão ($f12 é o argumento syscall para impressão de float) 
  	add $s1, $s1, 1		#incrementa 1 ao contador
  	add $s2, $s2, 2		#incrementa 2 ao denominador das diviões (é sempre impar)
  	j loop
