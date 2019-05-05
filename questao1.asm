@@ -13,14 +13,14 @@
  	li $v0, 5		#le um inteiro
  	syscall
  	add $a0, $v0, $zero	#guarda valor lido no $a0 (parametro do procedimento)
- 	add $a0, $a0, 1		#atribui 1 ao valor para facilitar quando executar o loop
+ 	add $a0, $a0, 1		#atribui 1 ao valor para facilitar na comparação lógica dentro do loop
 	
 	jal CalculaPi		#chama procedimento que calcula o pi
 	
 	li $v0, 4 
-	la $a0, msg2
+	la $a0, msg2		#imprime mensagem 2
 	syscall
-	li $v0, 2		#imprime float
+	li $v0, 2		#imprime valor aproximado de pi (float)
  	syscall	
  	j exit			#jump para o fim do programa
  	
