@@ -24,15 +24,13 @@
  	j exit			#jump para o fim do programa
  	
  CalculaPi:
- 	addi $sp, $sp, -4	#aloca memoria para variavel recebida da main
- 	sw $s0, 0($sp)		#carrega o espaço de memoria alocado
- 	add $s0, $a0, $zero	#guarda variavel vinda como parametro no espaço alocado 
+
  	li $s1, 1		#contador de termos
  	li $s2, 1		#denominador das divisões 
  	li $s3, 4		#variavel fixa do numerador
  	li $s4, 2		#variavel fixa para descobrir se o s1 é par ou impar 	
  loop: 	
- 	slt $t0, $s0, $s1	# quantidade de termos < contador ?
+ 	slt $t0, $a0, $s1	# quantidade de termos < contador ?
  	bne $t0, $zero, return	# se 1, desvia para o retorno da função
 	rem $t0, $s1, $s4	# resto da divisão para verificar se o termo é par ou impar
  	beq $t0, $zero, par	#se s1 for par, pula pra label par
@@ -54,8 +52,6 @@
  	j loop
  
  return: 
- 	lw $s0, 0($sp)		#recuperando $s0
- 	addi $sp, $sp, 4	#liberando memoria
  	jr $ra			#retorna o controle pra main
  	
  exit:
