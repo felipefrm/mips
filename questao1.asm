@@ -13,7 +13,6 @@
  	li $v0, 5		#le um inteiro
  	syscall
  	add $a0, $v0, $zero	#guarda valor lido no $a0 (parametro do procedimento)
- 	add $a0, $a0, 1		#atribui 1 ao valor para facilitar na comparação lógica dentro do loop
 	
 	jal CalculaPi		#chama procedimento que calcula o pi
 	
@@ -33,7 +32,8 @@
  	li $s3, 4		#variavel fixa do numerador
  	li $s4, 2		#variavel fixa para descobrir se o s1 é par ou impar 	
  loop: 	
- 	beq $s0, $s1, return	#caso de saida do loop
+ 	slt $t0, $s0, $s1	# quantidade de termos < contador ?
+ 	bne $t0, $zero, return	# se 1, desvia para o retorno da função
 	rem $t0, $s1, $s4	# resto da divisão para verificar se o termo é par ou impar
  	beq $t0, $zero, par	#se s1 for par, pula pra label par
  	mtc1 $s3,$f1		#converte inteiro para float e salva em f1
@@ -50,7 +50,7 @@
  	div.s $f1, $f1, $f2	#divide a constante 4 por um numero impar	
  	sub.s $f12,$f12,$f1	#subtrai ao valor de pi o resultado da divisão
  	add $s1,$s1, 1		#incrmeenta 1 ao contador
- 	add $s2, $s2, 2		#incremena 2 ao denominador das divisões (é sempre impar)
+ 	add $s2, $s2, 2		#incrementa 2 ao denominador das divisões (é sempre impar)
  	j loop
  
  return: 
