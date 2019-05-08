@@ -1,9 +1,9 @@
 .data 
  
- msg1: .asciiz "\nDigite quantas termos para calcular o PI deseja: " 
- msg2: .asciiz "\nO valor de PI é: "
- 	.text
- 	.globl main
+ 	msg1: .asciiz "\nDigite quantas termos para calcular o PI deseja: " 
+ 	msg2: .asciiz "\nO valor de PI é: "
+.text
+.globl main
  	
  main:
  	li $v0, 4		#imprime a mensagem 1
@@ -25,15 +25,15 @@
  	
  CalculaPi:
  
-    addi $sp, $sp, -16  #abre espaço na pilha para os registradores
-    sw $s1, 0($sp)
-    sw $s2, 4($sp)    #salva na pilha os registradores que serao utilizados
-    sw $s3, 8($sp)
-    sw $s4, 12($sp)
-    li $s1, 1		#contador de termos
-    li $s2, 1		#denominador das divisões 
-    li $s3, 4		#constante do numerador
-    li $s4, 2		#constante para descobrir se o s1 é par ou impar 	
+   	addi $sp, $sp, -16  #abre espaço na pilha para os registradores
+    	sw $s1, 0($sp)
+   	sw $s2, 4($sp)    #salva na pilha os registradores que serao utilizados
+    	sw $s3, 8($sp)
+    	sw $s4, 12($sp)
+	li $s1, 1		#contador de termos
+    	li $s2, 1		#denominador das divisões 
+    	li $s3, 4		#constante do numerador
+    	li $s4, 2		#constante para descobrir se o s1 é par ou impar 	
 
  loop: 	
  	slt $t0, $a0, $s1	# quantidade de termos < contador ?
@@ -56,11 +56,11 @@
  	j loop
 
  return: 
-    lw $s1, 0($sp)
-    lw $s2, 4($sp)      #recupera os registradores que foram alterados
-    lw $s3, 8($sp)
-    lw $s4, 12($sp)
-    addi $sp, $sp, -16  # libera espaço da pilha
+    	lw $s1, 0($sp)
+    	lw $s2, 4($sp)      #recupera os registradores que foram alterados
+    	lw $s3, 8($sp)
+    	lw $s4, 12($sp)
+    	addi $sp, $sp, -16  # libera espaço da pilha
  	jr $ra			#retorna o controle pra main
  	
  exit:
