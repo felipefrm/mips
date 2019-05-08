@@ -54,8 +54,8 @@ else:
  	
  	jal mdc			#chamada recursiva
  	
- 	lw $a1, 0($sp)		#recuperando $s0
- 	lw $a2, 4($sp)		#recuperando $s1
+ 	lw $a1, 0($sp)		#recuperando $a1
+ 	lw $a2, 4($sp)		#recuperando $a2
  	lw $ra 8($sp)		#recuperando o endereço de retorno
  	addi $sp, $sp, 12	#libera o espaço usado
  	jr $ra			#desvia o programa para o endereço de retorno do programa principal
