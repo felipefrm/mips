@@ -31,33 +31,29 @@ main:
  	la $a0, msg3		#printa a mensagem 3
  	syscall
 
-	add $a0, $t0, $zero	#a0 recebe o valor retornado da funão para que ele possa ser printado na tela
+	add $a0, $t0, $zero	#a0 recebe o valor retornado da função para que ele possa ser printado na tela
  	li $v0, 1
  	syscall
  	j exit
  	
  mdc:
- 	addi $sp, $sp, -12	#aloca memoria para variavel recebida da main
- 	sw $a1, 0($sp)		#carrega o espaço de memoria alocado
- 	sw $a2, 4($sp)
- 	sw $ra, 8($sp)		# Guarda endereço de retorno
+ 	addi $sp, $sp, -4	
+ 	sw $ra, 4($sp)		# Guarda endereço de retorno
  	
  	bnez $a2, else		# a2 != 0 ?
- 	add $v0, $a1, $zero	# se a2 == 0, coloca-se o valor de a2 em v0 para que possa ser retornado para a main 
- 	addi $sp, $sp, 12	#liberando memoria
+ 	add $v0, $a1, $zero	# se a2 == 0, coloca-se o valor de a1 em v0 para que possa ser retornado para a main 
+ 	addi $sp, $sp, 4	#liberando memoria
  	jr $ra			#desvia o programa para o endereço de retorno do programa principal
  	
 else:
 	add $t0, $a2, $zero	#aux = $a2
 	rem $a2, $a1, $a2	#resto da divisão de $a1 por $a2
- 	add $a1, $t0, $zero	# $a1 = aux
+ 	add $a1, $t0, $zero	#$a1 = aux
  	
  	jal mdc			#chamada recursiva
  	
- 	lw $a1, 0($sp)		#recuperando $a1
- 	lw $a2, 4($sp)		#recuperando $a2
- 	lw $ra 8($sp)		#recuperando o endereço de retorno
- 	addi $sp, $sp, 12	#libera o espaço usado
+ 	lw $ra 4($sp)		#recuperando o endereço de retorno
+ 	addi $sp, $sp, 4	#libera o espaço usado
  	jr $ra			#desvia o programa para o endereço de retorno do programa principal
 
 exit:
