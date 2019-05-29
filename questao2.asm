@@ -14,7 +14,7 @@ main:
  	
  	li $v0, 5		#le o primeiro inteiro
  	syscall
- 	add $a1, $v0, $zero	#guarda valor lido no $a0 (parametro do procedimento)
+ 	add $a1, $v0, $zero	#guarda valor lido no $a1 (parametro do procedimento)
  
  	li $v0, 4		#printa a mensagem 2
  	la $a0, msg2
@@ -22,7 +22,7 @@ main:
  	
  	li $v0, 5		#le o segundo inteiro
  	syscall
- 	add $a2, $v0, $zero	#guarda valor lido no $a1 (parametro do procedimento)
+ 	add $a2, $v0, $zero	#guarda valor lido no $a2 (parametro do procedimento)
  	
  	jal mdc
  	
