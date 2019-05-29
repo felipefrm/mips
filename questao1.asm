@@ -37,11 +37,11 @@
 
  loop: 	
  	slt $t0, $a0, $s1	# quantidade de termos < contador ?
- 	bne $t0, $zero, return	# se 1, desvia para o retorno da função
- 	mtc1 $s3,$f1		#converte inteiro para float e salva em f1
- 	mtc1 $s2,$f2		#converte inteiro para float e salva em f2
-	rem $t0, $s1, $s4	# resto da divisão para verificar se o termo é par ou impar
- 	div.s $f1, $f1, $f2	#divide a constante 4 por um numero impar
+ 	bne $t0, $zero, return	# se contador maior, desvia para o retorno da função
+ 	mtc1 $s3,$f1		#converte 4 para float e salva em f1
+ 	mtc1 $s2,$f2		#converte denominador das divisões para float e salva em f2
+	div.s $f1, $f1, $f2	#divide a constante 4 por um numero impar
+	rem $t0, $s1, $s4	# resto da divisão (contador % 2) para verificar se o termo é par ou impar
  	beq $t0, $zero, par	#se s1 for par, pula pra label par
  	add.s $f12,$f12,$f1	#soma ao valor de pi o resultado da divisão ($f12 é o argumento syscall para impressão de float) 
  	j incremento
